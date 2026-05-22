@@ -9,7 +9,7 @@ import json
 import re
 
 # VULNERABILITY: Hardcoded API key
-API_KEY = 'sk_live_1234567890abcdef'
+API_KEY = os.environ['STRIPE_SECRET_KEY']
 
 def process_user_input(data):
     """Process user input with multiple vulnerabilities."""
@@ -70,3 +70,4 @@ def parse_json_safely(json_str):
 
     # VULNERABILITY: JSON injection if data is later serialized unsafely
     return data
+
