@@ -62,14 +62,15 @@ def cmd():
 
 @app.route('/xss')
 def xss():
-    # VULNERABILITY: Cross-Site Scripting - unsanitized user input in template
+    # FIXED: Server-side template injection prevented by passing user input
+    # as template context data instead of interpolating it into the template string.
     name = request.args.get('name', '')
-    template = f'<h1>Hello, {name}!</h1><p>Welcome to our site.</p>'
-    return render_template_string(template)
+    template = '<h1>Hello, {{ name }}!</h1><p>Welcome to our site.</p>'
+    return render_template_string(template, name=name)
 
 @app.route('/traverse')
 def traverse():
-    # VULNERABILITY: Path Traversal - user input used to construct file path
+
     file_param = request.args.get('file', '')
     base_dir = '/home/user/files/'
     file_path = os.path.join(base_dir, file_param)
