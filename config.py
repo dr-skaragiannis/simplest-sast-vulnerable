@@ -1,6 +1,7 @@
 """
 Configuration file with intentional hardcoded secrets for SAST testing.
 """
+import os
 
 # VULNERABILITY: Hardcoded database credentials
 DATABASE_CONFIG = {
@@ -15,7 +16,7 @@ DATABASE_CONFIG = {
 AWS_ACCESS_KEY = 'AKIAIOSFODNN7EXAMPLE'
 AWS_SECRET_KEY = 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
 STRIPE_SECRET_KEY = 'sk_live_1234567890abcdef'
-GITHUB_TOKEN = 'ghp_abcdefghijklmnopqrstuvwxyz1234567890'
+GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN', '')
 
 # VULNERABILITY: Encryption key in source code
 ENCRYPTION_KEY = 'this-is-a-weak-encryption-key'
